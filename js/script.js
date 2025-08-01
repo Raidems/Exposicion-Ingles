@@ -133,6 +133,8 @@ const cursosData = {
     }
 };
 
+
+
 // ===== FUNCIÓN PARA TOGGLE DEL MENÚ HAMBURGUESA =====
 function toggleMenu() {
     const navMenu = document.querySelector('.nav-menu');
@@ -443,6 +445,8 @@ function checkout() {
         return;
     }
 
+    showPaymentMethodModal();
+
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const courseNames = cart.map(item => item.title).join(', ');
 
@@ -595,6 +599,8 @@ function setupFaqAccordion() {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('TechLearn Academy - Sistema iniciado correctamente');
 
+    addPaymentStyles();
+
     // Configurar navegación suave
     setupSmoothScrolling();
 
@@ -642,6 +648,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal();
+            closePaymentModal();
             if (isCartOpen) toggleCart();
         }
     });
@@ -650,6 +657,8 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('%c¡Bienvenido a TechLearn Academy! 🚀', 'color: #667eea; font-size: 16px; font-weight: bold;');
     console.log('%cSi eres desarrollador, ¡únete a nuestro equipo!', 'color: #764ba2; font-size: 12px;');
 });
+
+
 
 // ===== FUNCIONES PARA AGREGAR ELEMENTOS AL DOM =====
 function addCourseButtons() {
@@ -774,3 +783,529 @@ function loadThemePreference() {
         document.body.classList.add('dark-mode');
     }
 }
+
+// ===== FUNCIONES PARA MÉTODOS DE PAGO =====
+
+// Datos de métodos de pago disponibles
+const paymentMethods = {
+    'credit-card': {
+        name: 'Tarjeta de Crédito/Débito',
+        icon: '💳',
+        description: 'Visa, MasterCard, American Express',
+        processingFee: 0
+    },
+    'paypal': {
+        name: 'PayPal',
+        icon: '🅿️',
+        description: 'Pago seguro con PayPal',
+        processingFee: 0.03 // 3% de comisión
+    },
+    'oxxo': {
+        name: 'OXXO',
+        icon: '🏪',
+        description: 'Pago en tiendas OXXO',
+        processingFee: 15 // Comisión fija de $15 MXN
+    },
+    'spei': {
+        name: 'Transferencia SPEI',
+        icon: '🏦',
+        description: 'Transferencia bancaria inmediata',
+        processingFee: 0
+    },
+    'mercado-pago': {
+        name: 'Mercado Pago',
+        icon: '💙',
+        description: 'Pago con Mercado Pago',
+        processingFee: 0.025 // 2.5% de comisión
+    }
+};
+
+// Variable global para el método de pago seleccionado
+let selectedPaymentMethod = null;
+
+// Función principal de checkout modificada
+function checkout() {
+    if (cart.length === 0) {
+        showNotification('Tu carrito está vacío', 'warning');
+        return;
+    }
+
+    // Mostrar modal de métodos de pago
+    showPaymentMethodModal();
+}
+
+// Función para mostrar el modal de métodos de pago
+function showPaymentMethodModal() {
+    const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    
+    const modal = document.createElement('div');
+    modal.className = 'payment-modal';
+    modal.innerHTML = `
+        <div class="modal-content payment-modal-content">
+            <div class="modal-header">
+                <h2>💳 Selecciona tu Método de Pago</h2>
+                <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="cart-summary">
+                    <h3>Resumen de tu compra:</h3>
+                    <div class="summary-items">
+                        ${cart.map(item => `
+                            <div class="summary-item">
+                                <span>${item.icon} ${item.title}</span>
+                                <span>$${item.price} MXN</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="summary-subtotal">
+                        <strong>Subtotal: $${subtotal} MXN</strong>
+                    </div>
+                </div>
+
+                <div class="payment-methods">
+                    <h3>Métodos de pago disponibles:</h3>
+                    <div class="payment-options">
+                        ${Object.keys(paymentMethods).map(methodId => {
+                            const method = paymentMethods[methodId];
+                            return `
+                                <div class="payment-option" onclick="selectPaymentMethod('${methodId}')">
+                                    <div class="payment-option-content">
+                                        <div class="payment-icon">${method.icon}</div>
+                                        <div class="payment-info">
+                                            <h4>${method.name}</h4>
+                                            <p>${method.description}</p>
+                                            ${method.processingFee > 0 ? 
+                                                `<small class="processing-fee">
+                                                    ${typeof method.processingFee === 'number' && method.processingFee < 1 ? 
+                                                        `Comisión: ${(method.processingFee * 100)}%` : 
+                                                        `Comisión: $${method.processingFee} MXN`
+                                                    }
+                                                </small>` : 
+                                                '<small class="no-fee">Sin comisiones</small>'
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="payment-radio">
+                                        <input type="radio" name="payment-method" value="${methodId}" id="payment-${methodId}">
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <div id="payment-total" class="payment-total">
+                    <div class="total-breakdown">
+                        <div class="total-line">
+                            <span>Subtotal:</span>
+                            <span>$${subtotal} MXN</span>
+                        </div>
+                        <div class="total-line" id="fee-line" style="display: none;">
+                            <span>Comisión:</span>
+                            <span id="fee-amount">$0 MXN</span>
+                        </div>
+                        <div class="total-line total-final">
+                            <span><strong>Total a pagar:</strong></span>
+                            <span><strong id="final-total">$${subtotal} MXN</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closePaymentModal()" class="btn-secondary">
+                    Cancelar
+                </button>
+                <button onclick="proceedToPayment()" class="btn-primary" id="proceed-btn" disabled>
+                    Proceder al Pago
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+
+    // Animar entrada del modal
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.querySelector('.modal-content').style.transform = 'scale(1)';
+    }, 10);
+}
+
+// Función para seleccionar método de pago
+function selectPaymentMethod(methodId) {
+    selectedPaymentMethod = methodId;
+    
+    // Actualizar UI de selección
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    const selectedOption = document.querySelector(`input[value="${methodId}"]`).closest('.payment-option');
+    selectedOption.classList.add('selected');
+    
+    // Marcar el radio button
+    document.getElementById(`payment-${methodId}`).checked = true;
+    
+    // Calcular y mostrar el total con comisiones
+    updatePaymentTotal();
+    
+    // Habilitar botón de proceder
+    document.getElementById('proceed-btn').disabled = false;
+}
+
+// Función para actualizar el total con comisiones
+function updatePaymentTotal() {
+    if (!selectedPaymentMethod) return;
+    
+    const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    const method = paymentMethods[selectedPaymentMethod];
+    let fee = 0;
+    let total = subtotal;
+    
+    if (method.processingFee > 0) {
+        if (method.processingFee < 1) {
+            // Porcentaje
+            fee = subtotal * method.processingFee;
+        } else {
+            // Cantidad fija
+            fee = method.processingFee;
+        }
+        total = subtotal + fee;
+        
+        // Mostrar línea de comisión
+        document.getElementById('fee-line').style.display = 'flex';
+        document.getElementById('fee-amount').textContent = `$${fee.toFixed(2)} MXN`;
+    } else {
+        // Ocultar línea de comisión
+        document.getElementById('fee-line').style.display = 'none';
+    }
+    
+    document.getElementById('final-total').textContent = `$${total.toFixed(2)} MXN`;
+}
+
+// Función para proceder con el pago
+function proceedToPayment() {
+    if (!selectedPaymentMethod) {
+        showNotification('Por favor selecciona un método de pago', 'warning');
+        return;
+    }
+    
+    const method = paymentMethods[selectedPaymentMethod];
+    const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    let fee = 0;
+    
+    if (method.processingFee > 0) {
+        fee = method.processingFee < 1 ? subtotal * method.processingFee : method.processingFee;
+    }
+    
+    const total = subtotal + fee;
+    const courseNames = cart.map(item => item.title).join(', ');
+    
+    // Mostrar modal de confirmación específico para el método de pago
+    showPaymentConfirmation(method, total, courseNames);
+}
+
+// Función para mostrar confirmación de pago
+function showPaymentConfirmation(method, total, courseNames) {
+    const confirmationMessage = getPaymentInstructions(method, total);
+    
+    if (confirm(`${confirmationMessage}\n\n¿Confirmar compra de ${cart.length} curso(s) por $${total.toFixed(2)} MXN?\n\nCursos: ${courseNames}`)) {
+        // Simular proceso de pago según el método
+        processPayment(method, total);
+    }
+}
+
+// Función para obtener instrucciones específicas del método de pago
+function getPaymentInstructions(method, total) {
+    switch (method.name) {
+        case 'Tarjeta de Crédito/Débito':
+            return `Pago con ${method.name} (${method.icon})\nSerás redirigido a una página segura para ingresar los datos de tu tarjeta.\nTotal: $${total.toFixed(2)} MXN`;
+        
+        case 'OXXO':
+            return `Pago en ${method.name} (${method.icon})\nRecibirás un código de barras para pagar en cualquier tienda OXXO.\nTienes 3 días para realizar el pago.\nTotal: $${total.toFixed(2)} MXN`;
+        
+        case 'Transferencia SPEI':
+            return `${method.name} (${method.icon})\nRecibirás los datos bancarios para realizar la transferencia.\nEl curso se activará automáticamente al confirmar el pago.\nTotal: $${total.toFixed(2)} MXN`;
+        
+        case 'PayPal':
+            return `Pago con ${method.name} (${method.icon})\nSerás redirigido a PayPal para completar el pago de forma segura.\nTotal: $${total.toFixed(2)} MXN`;
+        
+        case 'Mercado Pago':
+            return `Pago con ${method.name} (${method.icon})\nPuedes pagar con tarjeta, transferencia o dinero en cuenta.\nTotal: $${total.toFixed(2)} MXN`;
+        
+        default:
+            return `Pago con ${method.name}\nTotal: $${total.toFixed(2)} MXN`;
+    }
+}
+
+// Función para procesar el pago
+function processPayment(method, total) {
+    // Simular diferentes tiempos de procesamiento según el método
+    const processingTime = {
+        'credit-card': 2000,
+        'paypal': 1500,
+        'mercado-pago': 1500,
+        'spei': 3000,
+        'oxxo': 1000
+    };
+    
+    showNotification('Procesando pago...', 'info');
+    
+    setTimeout(() => {
+        // Simular éxito del pago
+        const successMessage = getSuccessMessage(method, total);
+        showNotification(successMessage, 'success');
+        
+        // Limpiar carrito y cerrar modales
+        cart = [];
+        updateCartDisplay();
+        closePaymentModal();
+        if (isCartOpen) toggleCart();
+        
+        // Resetear método de pago seleccionado
+        selectedPaymentMethod = null;
+        
+    }, processingTime[selectedPaymentMethod] || 2000);
+}
+
+// Función para obtener mensaje de éxito específico
+function getSuccessMessage(method, total) {
+    switch (method.name) {
+        case 'OXXO':
+            return `¡Pago iniciado con éxito! Te enviamos por email el código de barras para pagar $${total.toFixed(2)} MXN en OXXO. Tienes 3 días para completar el pago.`;
+        
+        case 'Transferencia SPEI':
+            return `¡Solicitud procesada! Te enviamos los datos bancarios por email. Una vez realizada la transferencia de $${total.toFixed(2)} MXN, tu curso se activará automáticamente.`;
+        
+        default:
+            return `¡Compra realizada con éxito por $${total.toFixed(2)} MXN! Te enviaremos los detalles de acceso por email.`;
+    }
+}
+
+// Función para cerrar el modal de pago
+function closePaymentModal() {
+    const modal = document.querySelector('.payment-modal');
+    if (modal) {
+        modal.style.opacity = '0';
+        modal.querySelector('.modal-content').style.transform = 'scale(0.8)';
+        
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+    
+    // Resetear selección
+    selectedPaymentMethod = null;
+}
+
+// Función para agregar estilos CSS de los métodos de pago
+function addPaymentStyles() {
+    const styles = `
+        <style>
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .payment-modal-content {
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .summary-items {
+            margin: 15px 0;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .summary-subtotal {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #667eea;
+            text-align: right;
+        }
+
+        .payment-methods h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .payment-option {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .payment-option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .payment-option.selected .processing-fee,
+        .payment-option.selected .no-fee {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .payment-option-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            width: 50px;
+            text-align: center;
+        }
+
+        .payment-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .payment-info p {
+            margin: 0 0 5px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .payment-option.selected .payment-info p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .processing-fee {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .no-fee {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .payment-radio input {
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+        }
+
+        .payment-total {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .total-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .total-final {
+            border-top: 2px solid #667eea;
+            margin-top: 10px;
+            padding-top: 15px;
+            font-size: 1.2rem;
+        }
+
+        #proceed-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .payment-modal-content {
+                margin: 20px;
+                max-width: none;
+            }
+            
+            .payment-option-content {
+                gap: 10px;
+            }
+            
+            .payment-icon {
+                font-size: 1.5rem;
+                width: 40px;
+            }
+            
+            .payment-info h4 {
+                font-size: 1rem;
+            }
+            
+            .payment-info p {
+                font-size: 0.8rem;
+            }
+        }
+        </style>
+    `;
+    
+    document.head.appendChild(document.createElement('div')).innerHTML = styles;
+}
+
+// Inicializar estilos cuando se carga el documento
+document.addEventListener('DOMContentLoaded', function() {
+    addPaymentStyles();
+});
+
+// Event listener para cerrar modal con ESC (actualizado)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeModal();
+        closePaymentModal();
+        if (isCartOpen) toggleCart();
+    }
+});
