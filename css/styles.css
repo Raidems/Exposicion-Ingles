@@ -21,6 +21,7 @@
     --font-heading: 'Montserrat', sans-serif; /* Puedes importar Google Fonts */
 }
 
+
 /* ===== ESTILOS BASE Y GENERALES ===== */
 * {
     box-sizing: border-box;
@@ -141,14 +142,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== HEADER ===== */
 header {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 20px 0;
-    position: fixed;
+    display: flex;
+    justify-content: space-between; /* Esto distribuye el espacio entre los elementos */
+    align-items: center; /* Centra los elementos verticalmente */
     width: 100%;
+    
+    /* Y el resto de tus estilos */
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    padding: 1rem 5%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -156,6 +162,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .logo a {
@@ -223,7 +230,7 @@ header .container {
 
 /* ===== HERO SECTION ===== */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1920x800?text=Hero+Image') no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('./inicio.jpg') no-repeat center center/cover;
     color: var(--color-white);
     text-align: center;
     padding: 150px 20px 100px;

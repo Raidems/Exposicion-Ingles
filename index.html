@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TechLearn Academy - Tu Futuro en Tecnología</title>
+    <title>TechLearn Academy - Your Future in Technology</title>
     <link rel="stylesheet" href="css/styles.css" />
     <link
         rel="stylesheet"
@@ -24,28 +24,32 @@
                     <span></span>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#hero">Inicio</a></li>
-                    <li><a href="#courses">Cursos</a></li>
-                    <li><a href="#about">Nosotros</a></li>
-                    <li><a href="#testimonials">Testimonios</a></li>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
+            <div class="cart-button">
+                <button onclick="toggleCart()" class="cart-toggle">
+                    🛒 <span id="cart-count">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
     <main>
         <section id="hero" class="hero">
             <div class="container">
-                <h1>Desarrolla tus Habilidades Tecnológicas</h1>
+                <h1>Develop Your Tech Skills</h1>
                 <p>
-                    Cursos prácticos y de vanguardia impartidos por expertos de la
-                    industria.
+                    Hands-on, cutting-edge courses taught by industry experts.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#courses" class="btn-primary">Explorar Cursos</a>
-                    <a href="#contact" class="btn-secondary">Contáctanos</a>
+                    <a href="#courses" class="btn-primary">Explore Courses</a>
+                    <a href="#contact" class="btn-secondary">Contact Us</a>
                 </div>
             </div>
         </section>
@@ -55,19 +59,19 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-number" data-target="200">+</div>
-                        <p class="stat-text">Estudiantes Activos</p>
+                        <p class="stat-text">Active Students</p>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-target="6"></div>
-                        <p class="stat-text">Cursos Especializados</p>
+                        <p class="stat-text">Specialized Courses</p>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-target="95">%</div>
-                        <p class="stat-text">Tasa de Satisfacción</p>
+                        <p class="stat-text">Satisfaction Rate</p>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-target="1500">+</div>
-                        <p class="stat-text">Horas de Contenido</p>
+                        <p class="stat-text">Hours of Content</p>
                     </div>
                 </div>
             </div>
@@ -75,32 +79,28 @@
 
         <section id="mision-vision" class="section-padding bg-light-gray">
             <div class="container">
-                <h2 class="section-title">Nuestra Esencia</h2>
+                <h2 class="section-title">Our Essence</h2>
                 <div class="mision-vision-content">
                     <div class="mv-item">
-                        <h3>Misión 🚀</h3>
+                        <h3>Mission 🚀</h3>
                         <p>
-                            Capacitar a individuos con las habilidades tecnológicas más
-                            demandadas, fomentando la innovación y el pensamiento crítico
-                            para construir un futuro digital próspero.
+                            Empower individuals with the most in-demand tech skills, promoting innovation and critical thinking to build a prosperous digital future.
                         </p>
                     </div>
                     <div class="mv-item">
-                        <h3>Visión ✨</h3>
+                        <h3>Vision ✨</h3>
                         <p>
-                            Ser la plataforma educativa líder en Latinoamérica, reconocida
-                            por su excelencia académica, su impacto en la empleabilidad y
-                            por inspirar a la próxima generación de líderes tecnológicos.
+                            To be the leading educational platform in Latin America, recognized for academic excellence, employability impact, and inspiring the next generation of tech leaders.
                         </p>
                     </div>
                     <div class="mv-item">
-                        <h3>Nuestros Valores 💖</h3>
+                        <h3>Our Values 💖</h3>
                         <ul>
-                            <li><strong>Excelencia:</strong> Compromiso con la calidad y la mejora continua.</li>
-                            <li><strong>Innovación:</strong> Adaptación constante a las nuevas tendencias tecnológicas.</li>
-                            <li><strong>Integridad:</strong> Transparencia y ética en todas nuestras acciones.</li>
-                            <li><strong>Comunidad:</strong> Fomento de un ambiente colaborativo y de apoyo.</li>
-                            <li><strong>Impacto:</strong> Creación de oportunidades reales para nuestros estudiantes.</li>
+                            <li><strong>Excellence:</strong> Commitment to quality and continuous improvement.</li>
+                            <li><strong>Innovation:</strong> Constant adaptation to new tech trends.</li>
+                            <li><strong>Integrity:</strong> Transparency and ethics in all our actions.</li>
+                            <li><strong>Community:</strong> Fostering a collaborative and supportive environment.</li>
+                            <li><strong>Impact:</strong> Creating real opportunities for our students.</li>
                         </ul>
                     </div>
                 </div>
@@ -109,50 +109,50 @@
 
         <section id="courses" class="section-padding">
             <div class="container">
-                <h2 class="section-title">Nuestros Cursos Populares</h2>
+                <h2 class="section-title">Our Popular Courses</h2>
                 <p class="section-subtitle">
-                    Aprende de la mano de expertos en las tecnologías más demandadas.
+                    Learn from experts in the most in-demand technologies.
                 </p>
                 <div class="courses-grid">
                     <div class="course-card" data-course-id="programacion">
                         <span class="course-icon">💻</span>
-                        <h3>Programación</h3>
-                        <p>Domina los lenguajes de programación más demandados.</p>
+                        <h3>Programming</h3>
+                        <p>Master the most in-demand programming languages.</p>
                         <p class="course-price">$299 MXN</p>
                     </div>
 
                     <div class="course-card" data-course-id="sistemas">
                         <span class="course-icon">⚙️</span>
-                        <h3>Sistemas y Assembler</h3>
-                        <p>Programación de bajo nivel y administración de sistemas.</p>
+                        <h3>Systems and Assembler</h3>
+                        <p>Low-level programming and systems administration.</p>
                         <p class="course-price">$399 MXN</p>
                     </div>
 
                     <div class="course-card" data-course-id="redes">
                         <span class="course-icon">🌐</span>
-                        <h3>Redes y Telecomunicaciones</h3>
-                        <p>Diseña y administra redes de computadoras.</p>
+                        <h3>Networks and Telecommunications</h3>
+                        <p>Design and manage computer networks.</p>
                         <p class="course-price">$449 MXN</p>
                     </div>
 
                     <div class="course-card" data-course-id="arduino">
                         <span class="course-icon">🤖</span>
-                        <h3>Arduino y Sistemas Embebidos</h3>
-                        <p>Crea proyectos IoT con microcontroladores.</p>
+                        <h3>Arduino and Embedded Systems</h3>
+                        <p>Create IoT projects with microcontrollers.</p>
                         <p class="course-price">$349 MXN</p>
                     </div>
 
                     <div class="course-card" data-course-id="bases-datos">
                         <span class="course-icon">🗄️</span>
-                        <h3>Bases de Datos</h3>
-                        <p>Diseña y administra bases de datos relacionales y NoSQL.</p>
+                        <h3>Databases</h3>
+                        <p>Design and manage relational and NoSQL databases.</p>
                         <p class="course-price">$329 MXN</p>
                     </div>
 
                     <div class="course-card" data-course-id="web">
                         <span class="course-icon">🎨</span>
-                        <h3>Desarrollo Web</h3>
-                        <p>Construye aplicaciones web modernas y responsivas.</p>
+                        <h3>Web Development</h3>
+                        <p>Build modern and responsive web applications.</p>
                         <p class="course-price">$379 MXN</p>
                     </div>
                 </div>
@@ -161,45 +161,33 @@
 
         <section id="about" class="section-padding">
             <div class="container">
-                <h2 class="section-title">Sobre TechLearn Academy</h2>
+                <h2 class="section-title">About TechLearn Academy</h2>
                 <p class="section-subtitle">
-                    Conoce nuestra historia y al equipo que impulsa tu aprendizaje.
+                    Learn about our story and the team behind your learning.
                 </p>
 
                 <div class="about-content">
                     <div class="about-description">
                         <p>
-                            En TechLearn Academy, creemos que el acceso a una educación
-                            tecnológica de calidad es fundamental para el futuro. Fundada
-                            en 2020, nuestra academia nació con la visión de cerrar la brecha
-                            de habilidades en la industria tecnológica, ofreciendo programas
-                            prácticos y actualizados, impartidos por expertos de la industria.
+                            At TechLearn Academy, we believe access to quality tech education is essential for the future. Founded in 2020, our academy was created to close the skills gap in the tech industry, offering practical and up-to-date programs taught by industry experts.
                         </p>
                         <p>
-                            Nuestra metodología se centra en el aprendizaje práctico y
-                            proyectos reales, asegurando que cada estudiante adquiera no solo
-                            conocimientos teóricos, sino también la experiencia necesaria
-                            para aplicar lo aprendido en el mundo laboral.
+                            Our methodology focuses on hands-on learning and real projects, ensuring each student gains not only theoretical knowledge but also the experience to apply it in the real world.
                         </p>
-                        <a href="#contact" class="btn-primary">¡Únete a nuestra comunidad!</a>
+                        <a href="#contact" class="btn-primary">Join Our Community!</a>
                     </div>
                     <div class="about-image">
-                        <img
-                            src="https://via.placeholder.com/600x400?text=Equipo+TechLearn"
-                            alt="Equipo de TechLearn Academy"
-                        />
+                        <img src="imagenes/tech.jpg" alt="TechLearn Academy Team" />
                     </div>
                 </div>
 
-                <!-- PERFILES DE LOS DESARROLLADORES  -->
-
-                <h3 class="section-subtitle-small">Conoce a Nuestros Instructores</h3>
+                <h3 class="section-subtitle-small">Meet Our Instructors</h3>
                 <div class="team-grid">
                     <div class="team-member">
-                        <img src="imagenes/jonh.jpg" alt="Foto de John Smith">
+                        <img src="imagenes/jonh.jpg" alt="Photo of John Smith">
                         <h4>Erik Narciso Bernardino</h4>
-                        <span class="role">Director y Fundador</span>
-                        <p class="bio">Con más de 15 años de experiencia en desarrollo de software y gestión de equipos.</p>
+                        <span class="role">Director and Founder</span>
+                        <p class="bio">Over 15 years of experience in software development and team management.</p>
                         <div class="social-links">
                             <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                             <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
@@ -207,10 +195,10 @@
                     </div>
 
                     <div class="team-member">
-                        <img src="imagenes/n.webp" alt="Foto de Jane Doe">
+                        <img src="imagenes/n.webp" alt="Photo of Jane Doe">
                         <h4>Rogelio Ernesto Arteaga Velazco</h4>
-                        <span class="role">Instructor Senior de Ciberseguridad</span>
-                        <p class="bio">Experto en redes y seguridad, con certificaciones internacionales y una pasión por la enseñanza.</p>
+                        <span class="role">Senior Cybersecurity Instructor</span>
+                        <p class="bio">Network and security expert with international certifications and a passion for teaching.</p>
                         <div class="social-links">
                             <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                             <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
@@ -218,10 +206,10 @@
                     </div>
 
                     <div class="team-member">
-                        <img src="imagenes/a.webp" alt="Foto de Emily White">
+                        <img src="imagenes/a.webp" alt="Photo of Emily White">
                         <h4>Diego Corpus Chavez</h4>
-                        <span class="role">Especialista en Desarrollo Web</span>
-                        <p class="bio">Apasionado por el diseño de interfaces y la creación de experiencias de usuario increíbles.</p>
+                        <span class="role">Web Development Specialist</span>
+                        <p class="bio">Passionate about interface design and creating amazing user experiences.</p>
                         <div class="social-links">
                             <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                             <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
@@ -229,297 +217,242 @@
                     </div>
 
                     <div class="team-member">
-                        <img src="imagenes/nadie.jpg" alt=" Foto de nadie">
+                        <img src="imagenes/nadie.jpg" alt="Photo of Alan">
                         <h4>Alan Rodrigo Rezendiz Martinez</h4>
-                        <span class="role"> desarrollador Back-End</span>
-                        <p class="bio"> NO sabe hacer nada</p>
-                        <div class="social-links" >
+                        <span class="role">Back-End Developer</span>
+                        <p class="bio">Responsible for server-side development, building databases and backend logic for stability and efficiency.</p>
+                        <div class="social-links">
                             <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                             <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
 
                     <div class="team-member">
-                        <img src="imagenes/nad.jpg" alt=" Foto de nadie">
+                        <img src="imagenes/nad.jpg" alt="Photo of Fabiola">
                         <h4>Fabiola Martinez Rauda</h4>
-                        <span class="role"> desarrollador Back-End</span>
-                        <p class="bio"> Nashgasdad</p>
-                        <div class="social-links" >
+                        <span class="role">Back-End Developer</span>
+                        <p class="bio">In charge of testing all site features. Ensures error-free functionality and a smooth user experience.</p>
+                        <div class="social-links">
                             <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                             <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
-
-                </div>
-                <!-- FIN DE LOS PERFILES DEL DESARROLLADOR-->>
-
-            </div>
-        </section>
-
-        <section id="testimonials" class="section-padding bg-light-gray">
-            <div class="container">
-                <h2 class="section-title">Lo que Dicen Nuestros Estudiantes</h2>
-                <p class="section-subtitle">Historias reales de éxito que nos inspiran.</p>
-
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <img
-                            src="perfil-estudiante/est3.jpg"
-                            alt="Foto de María P."
-                        />
-                        <p class="quote">
-                            "Gracias a TechLearn Academy, pude cambiar mi carrera y encontrar
-                            un trabajo soñado en desarrollo web. Los instructores son
-                            increíbles y el material muy práctico."
-                        </p>
-                        <h4 class="student-name">María P.</h4>
-                        <p class="course-taken">Curso de Desarrollo Web</p>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <img
-                            src="perfil-estudiante/est1.jpg"
-                            alt="Foto de Juan L."
-                        />
-                        <p class="quote">
-                            "El curso de Sistemas y Assembler fue un desafío, pero la calidad
-                            de la enseñanza y el soporte hicieron que valiera la pena. ¡Mi
-                            lógica de programación mejoró exponencialmente!"
-                        </p>
-                        <h4 class="student-name">Juan L.</h4>
-                        <p class="course-taken">Curso de Sistemas y Assembler</p>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <img
-                            src="perfil-estudiante/est2.jpg"
-                            alt="Foto de Sofía R."
-                        />
-                        <p class="quote">
-                            "¡Recomiendo el curso de Arduino a cualquiera que quiera empezar
-                            en el IoT! Los proyectos fueron súper divertidos y aprendí
-                            muchísimo de electrónica y programación embebida."
-                        </p>
-                        <h4 class="student-name">Sofía R.</h4>
-                        <p class="course-taken">Curso de Arduino y Sistemas Embebidos</p>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-
-                <div class="text-center" style="margin-top: 40px;">
-                    <a href="#" class="btn-secondary">Ver Más Testimonios</a>
                 </div>
             </div>
         </section>
 
-        <section id="faq" class="section-padding">
-            <div class="container">
-                <h2 class="section-title">Preguntas Frecuentes</h2>
-                <p class="section-subtitle">
-                    Encuentra respuestas a tus dudas más comunes.
+        <!-- The rest continues with testimonials, FAQ, contact, and footer (which you've already received). -->
+<section id="testimonials" class="section-padding bg-light-gray">
+    <div class="container">
+        <h2 class="section-title">What Our Students Say</h2>
+        <p class="section-subtitle">Real success stories that inspire us.</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <img src="perfil-estudiante/est3.jpg" alt="Photo of María P." />
+                <p class="quote">
+                    "Thanks to TechLearn Academy, I changed my career and landed my dream job in web development. The instructors are amazing and the material is very practical."
                 </p>
-
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>¿Cuáles son los requisitos para inscribirme a un curso?</h4>
-                            <span class="faq-toggle-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>
-                                La mayoría de nuestros cursos no requieren conocimientos
-                                previos avanzados, solo una computadora y conexión a internet.
-                                Para cursos más especializados, como "Sistemas y Assembler",
-                                se recomienda tener bases de programación. Consulta la página
-                                de cada curso para requisitos específicos.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>¿Cómo es la metodología de enseñanza de TechLearn Academy?</h4>
-                            <span class="faq-toggle-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>
-                                Nuestra metodología se basa en el aprendizaje práctico.
-                                Combinamos clases en vivo interactivas, material de apoyo
-                                (videos, lecturas, ejercicios), proyectos reales y soporte
-                                continuo de nuestros instructores para asegurar que apliques
-                                lo aprendido desde el primer día.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>¿Recibo un certificado al finalizar los cursos?</h4>
-                            <span class="faq-toggle-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>
-                                ¡Sí! Todos nuestros cursos incluyen un certificado de
-                                finalización avalado por TechLearn Academy, que podrás compartir
-                                en tu perfil de LinkedIn y con posibles empleadores.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>¿Qué tipo de soporte técnico y académico ofrecen?</h4>
-                            <span class="faq-toggle-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>
-                                Ofrecemos soporte a través de foros de discusión, sesiones de
-                                preguntas y respuestas en vivo, y canales de comunicación
-                                directos con los instructores. Nuestro objetivo es que ningún
-                                estudiante se quede con dudas.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>¿Hay opciones de financiamiento o becas?</h4>
-                            <span class="faq-toggle-icon">+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <p>
-                                Actualmente no ofrecemos opciones de financiamiento directo ni
-                                becas. Sin embargo, estamos trabajando para establecer
-                                alianzas que puedan brindar estas facilidades en el futuro.
-                                Mantente atento a nuestras redes sociales.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section-padding bg-light-gray">
-            <div class="container">
-                <h2 class="section-title">Contáctanos</h2>
-                <p class="section-subtitle">Envíanos tu consulta, estamos aquí para ayudarte.</p>
-
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item animate">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Av. Siempre Viva 742, CDMX, México</p>
-                        </div>
-                        <div class="contact-item animate">
-                            <i class="fas fa-envelope"></i>
-                            <p><a href="mailto:info@techlearn.com">info@techlearn.com</a></p>
-                        </div>
-                        <div class="contact-item animate">
-                            <i class="fas fa-phone"></i>
-                            <p><a href="tel:+525512345678">+52 55 1234 5678</a></p>
-                        </div>
-                    </div>
-
-                    <form class="contact-form" onsubmit="handleSubmit(event)">
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo:</label>
-                            <input
-                                type="text"
-                                id="nombre"
-                                name="nombre"
-                                placeholder="Tu nombre"
-                                required
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Correo electrónico:</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="tu.correo@ejemplo.com"
-                                required
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="curso">Curso de interés:</label>
-                            <select id="curso" name="curso" required>
-                                <option value="">Selecciona un curso</option>
-                                <option value="programacion">Programación</option>
-                                <option value="sistemas">Sistemas y Assembler</option>
-                                <option value="redes">Redes y Telecomunicaciones</option>
-                                <option value="arduino">Arduino y Sistemas Embebidos</option>
-                                <option value="bases-datos">Bases de Datos</option>
-                                <option value="web">Desarrollo Web</option>
-                                <option value="otro">Otro / Consulta General</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="mensaje">Tu mensaje:</label>
-                            <textarea
-                                id="mensaje"
-                                name="mensaje"
-                                rows="5"
-                                placeholder="Escribe tu consulta aquí..."
-                                required
-                            ></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-primary">Enviar Mensaje</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>TechLearn Academy</h3>
-                    <p>
-                        Impulsando tu carrera tecnológica con educación de calidad y
-                        experiencia práctica.
-                    </p>
-                    <div class="social-icons">
-                        <a href="https://es-la.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com/?logout=1754014114879" target="_blank" rel="noopener noreferrer" ><i class="fab fa-x"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" ><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://mx.linkedin.com/ " target="_blank" rel="noopener noreferrer" ><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-links">
-                    <h3>Enlaces Rápidos</h3>
-                    <ul>
-                        <li><a href="#hero">Inicio</a></li>
-                        <li><a href="#courses">Cursos</a></li>
-                        <li><a href="#about">Nosotros</a></li>
-                        <li><a href="#contact">Contacto</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
-                        <li><a href="#">Términos de Servicio</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-contact">
-                    <h3>Contáctanos</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. Siempre Viva 742, CDMX</p>
-                    <p><i class="fas fa-phone"></i> +52 55 1234 5678</p>
-                    <p><i class="fas fa-envelope"></i> info@techlearn.com</p>
-                </div>
+                <h4 class="student-name">María P.</h4>
+                <p class="course-taken">Web Development Course</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
             </div>
 
-            <div class="footer-bottom">
-                <p>&copy; 2025 TechLearn Academy. Todos los derechos reservados.</p>
+            <div class="testimonial-card">
+                <img src="perfil-estudiante/est1.jpg" alt="Photo of Juan L." />
+                <p class="quote">
+                    "The Systems and Assembler course was challenging, but the quality of teaching and support made it worthwhile. My programming logic improved greatly!"
+                </p>
+                <h4 class="student-name">Juan L.</h4>
+                <p class="course-taken">Systems and Assembler Course</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="perfil-estudiante/est2.jpg" alt="Photo of Sofía R." />
+                <p class="quote">
+                    "I recommend the Arduino course to anyone starting in IoT! The projects were super fun and I learned a lot about electronics and embedded programming."
+                </p>
+                <h4 class="student-name">Sofía R.</h4>
+                <p class="course-taken">Arduino and Embedded Systems Course</p>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
             </div>
         </div>
-    </footer>
 
-    <script src="js/script.js"></script>
+        <div class="text-center" style="margin-top: 40px;">
+            <a href="#" class="btn-secondary">View More Testimonials</a>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="section-padding">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Find answers to your most common questions.</p>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>What are the requirements to enroll in a course?</h4>
+                    <span class="faq-toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>
+                        Most of our courses do not require advanced prior knowledge, just a computer and internet connection. For more specialized courses like "Systems and Assembler," basic programming skills are recommended. Check each course page for specific requirements.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>What is TechLearn Academy's teaching methodology?</h4>
+                    <span class="faq-toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>
+                        Our methodology focuses on practical learning. We combine interactive live classes, support materials (videos, readings, exercises), real projects, and continuous instructor support to ensure you apply what you learn from day one.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Do I receive a certificate upon completing the courses?</h4>
+                    <span class="faq-toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>
+                        Yes! All our courses include a completion certificate endorsed by TechLearn Academy, which you can share on your LinkedIn profile and with potential employers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>What kind of technical and academic support do you offer?</h4>
+                    <span class="faq-toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>
+                        We offer support through discussion forums, live Q&A sessions, and direct communication channels with instructors. Our goal is for no student to be left with doubts.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Are there financing or scholarship options?</h4>
+                    <span class="faq-toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>
+                        Currently, we do not offer direct financing or scholarships. However, we are working on partnerships to provide these in the future. Stay tuned to our social media.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="section-padding bg-light-gray">
+    <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Send us your inquiry, we are here to help.</p>
+
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item animate">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>742 Evergreen Ave, Mexico City, Mexico</p>
+                </div>
+                <div class="contact-item animate">
+                    <i class="fas fa-envelope"></i>
+                    <p><a href="mailto:info@techlearn.com">info@techlearn.com</a></p>
+                </div>
+                <div class="contact-item animate">
+                    <i class="fas fa-phone"></i>
+                    <p><a href="tel:+525512345678">+52 55 1234 5678</a></p>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="nombre">Full Name:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Your name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="curso">Course of Interest:</label>
+                    <select id="curso" name="curso" required>
+                        <option value="">Select a course</option>
+                        <option value="programacion">Programming</option>
+                        <option value="sistemas">Systems and Assembler</option>
+                        <option value="redes">Networks and Telecommunications</option>
+                        <option value="arduino">Arduino and Embedded Systems</option>
+                        <option value="bases-datos">Databases</option>
+                        <option value="web">Web Development</option>
+                        <option value="otro">Other / General Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Your Message:</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Write your inquiry here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>TechLearn Academy</h3>
+                <p>
+                    Boost your tech career with quality education and practical experience.
+                </p>
+                <div class="social-icons">
+                    <a href="https://es-la.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/?logout=1754014114879" target="_blank" rel="noopener noreferrer"><i class="fab fa-x"></i></a>
+                    <a href="https://mx.linkedin.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 742 Evergreen Ave, CDMX</p>
+                <p><i class="fas fa-phone"></i> +52 55 1234 5678</p>
+                <p><i class="fas fa-envelope"></i> info@techlearn.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechLearn Academy. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
 </body>
 </html>
